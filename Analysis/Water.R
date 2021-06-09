@@ -8,22 +8,16 @@
 rm(list=ls()) # clears working environment 
 
 
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all coloums
-library(ggplot2)
 library(grid)
 library(gridExtra)
 library(reshape2)
-library(tidyverse)
 library(scales)
 library(plotly)
 
-
-paths <- here::here("Data/Results/")
-
 ####reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
+readfiles<- function() {
   files<- list.files(path = here::here("Data/Results/"), pattern="yearly", full.names = T)
   
   outputfiles<-lapply(files, function(x) {
@@ -90,7 +84,7 @@ summary(lm1)
 
 plot(lm1) # check assumptions
 
-anova(lm1, lm0) # compar model with null model 
+anova(lm1, lm0) # compare model with null model 
 # p < 0.01
 
 # effect size cohen's d

@@ -3,25 +3,18 @@
 # ==============================================
 rm(list=ls()) # clears working environment 
 
-
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all coloums
-library(ggplot2)
 library(grid)
 library(gridExtra)
 library(reshape2)
-library(tidyverse)
 library(scales)
 library(gtable)
 library(cowplot)
 library(data.table)
 
-
-paths <- here::here("Data/Results/Appendix/")
-
 #### reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
+readfiles<- function() {
   files<- list.files(path = here::here("Data/Results/Appendix/"), pattern="yearly", full.names = T)
   
   

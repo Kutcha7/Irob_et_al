@@ -133,7 +133,7 @@ unique(resultsdf$ParameterName) # check if no levels are doubled
 
 
 # change perennials grazeprefer to 0 -> model will error if negative input values are given
-setwd("~/Documents/Strategy/Grazing_Sens/")
+setwd("~/Sensitivity/") # set  dir to sensitivity
 
 resultsdf$PFT <- vapply(resultsdf$PFT, paste, collapse = ", ", character(1L))
 
@@ -190,11 +190,11 @@ for (i in 1:length(subsets_PFT)) {
 
 #### scatterPLOTS ---
 
-setwd("~/Documents/Strategy/Grazing_Sens/Input/Browse/")
+setwd("~/Browse/")
 
-path<-("~/Documents/Strategy/Grazing_Sens/")
+path<-("~/Sensitivity/")
 
-readfiles<- function(path= "~/Documents/Strategy/Grazing_Sens/Input/Browse/") {
+readfiles<- function(path= "~/Input/Browse/") {
   files<-list.files(path= path, pattern=".txt")
   
   outputfiles<-lapply(files, function(x) {

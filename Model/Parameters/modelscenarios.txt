@@ -2,7 +2,7 @@
 #Input files will be chosen and output files will be coded based on IDs and repetitions you indicate here.
 
 #General scenario parameters
-Scenarios:         	6			total scenarios that logically differ from each other (e.g. climate, grazing, soil texture). There must be at least one scenario!
+Scenarios:         	10			total scenarios that logically differ from each other (e.g. climate, grazing, soil texture). There must be at least one scenario!
 ClimateRepetitions: 	30     			total repetitions accounting for climate variability (because of the rain generator). Weather file for each climate repetition = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt. There must be at least one repetition! 
 ModelRepetitions:       1			total repetitions accounting for model variability (because of random numbers). There must be at least one repetition! 
 
@@ -31,6 +31,28 @@ VegetationParametersID:	SR10browse	ID of vegetation parameters file. Vegetation 
 ###################
 #   Scenario 3    #			
 ##################*
+OutputID: 		EH_SR20browse			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
+ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
+WeatherFileID:		control			ID of weather file. Weather file = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt
+ElevationFileID:	EH			ID of elevation file. Elevation file = elevation_[xsize]_[ElevationFileID].txt
+SoilParametersID:	EH			ID of soil parameters file. Soil parameters file = soilparameters_[SoilParametersID].txt	
+VegetationParametersID:	SR20browse	ID of vegetation parameters file. Vegetation parameters file = vegetationparameters_[VegetationParametersID].txt
+
+
+###################
+#   Scenario 4    #			
+##################*
+OutputID: 		EH_SR20graze			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
+ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
+WeatherFileID:		control			ID of weather file. Weather file = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt
+ElevationFileID:	EH			ID of elevation file. Elevation file = elevation_[xsize]_[ElevationFileID].txt
+SoilParametersID:	EH			ID of soil parameters file. Soil parameters file = soilparameters_[SoilParametersID].txt	
+VegetationParametersID:	SR20graze	ID of vegetation parameters file. Vegetation parameters file = vegetationparameters_[VegetationParametersID].txt
+
+
+###################
+#   Scenario 5    #			
+##################*
 OutputID: 		EH_SR30graze			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
 ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
 WeatherFileID:		control			ID of weather file. Weather file = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt
@@ -40,7 +62,7 @@ VegetationParametersID:	SR30graze	ID of vegetation parameters file. Vegetation p
 
 
 ###################
-#   Scenario 4    #			
+#   Scenario 6    #			
 ##################*
 OutputID: 		EH_SR30browse			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
 ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
@@ -51,7 +73,29 @@ VegetationParametersID:	SR30browse	ID of vegetation parameters file. Vegetation 
 
 
 ###################
-#   Scenario 5    #			
+#   Scenario 7    #			
+##################*
+OutputID: 		EH_SR40graze			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
+ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
+WeatherFileID:		control			ID of weather file. Weather file = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt
+ElevationFileID:	EH			ID of elevation file. Elevation file = elevation_[xsize]_[ElevationFileID].txt
+SoilParametersID:	EH			ID of soil parameters file. Soil parameters file = soilparameters_[SoilParametersID].txt	
+VegetationParametersID:	SR40graze	ID of vegetation parameters file. Vegetation parameters file = vegetationparameters_[VegetationParametersID].txt
+
+
+###################
+#   Scenario 8    #			
+##################*
+OutputID: 		EH_SR40browse			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
+ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
+WeatherFileID:		control			ID of weather file. Weather file = [Site]_[simYears]years_[WeatherFileID]_climrep-[climateRepetition].txt
+ElevationFileID:	EH			ID of elevation file. Elevation file = elevation_[xsize]_[ElevationFileID].txt
+SoilParametersID:	EH			ID of soil parameters file. Soil parameters file = soilparameters_[SoilParametersID].txt	
+VegetationParametersID:	SR40browse	ID of vegetation parameters file. Vegetation parameters file = vegetationparameters_[VegetationParametersID].txt
+
+
+###################
+#   Scenario 9    #			
 ##################*
 OutputID: 		EH_SR50graze			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
 ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	
@@ -62,7 +106,7 @@ VegetationParametersID:	SR50graze	ID of vegetation parameters file. Vegetation p
 
 
 ###################
-#   Scenario 6    #			
+#   Scenario 10    #			
 ##################*
 OutputID: 		EH_SR50browse			ID of model output. Result files = [Site]_[simYears]years_[yearly/daily]_[OutputID]_climrep-[climateRepetition]_modelrep-[repetition].txt
 ModelParametersID: 	control			ID of model parameters file. Model parameters file = modelparameters_[ModelParametersID].txt	

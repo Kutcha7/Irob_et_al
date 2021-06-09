@@ -26,7 +26,7 @@ cover<-cover[, !names(cover) %in% c("meanGtotalcover", "meanAtotalcover", "meanS
 
 cover <- cover %>% filter(year> 79) # only include last 20 years of simulation 
 
-cover<-melt(cover, id.vars=c("year", "scenario"))
+cover<-reshape2::melt(cover, id.vars=c("year", "scenario"))
 
 cover <- cover %>% # rename melted columns
   rename(
@@ -268,13 +268,13 @@ library(cowplot)
 compplots <- plot_grid(perennials_by_strat_bytreatment_swap, shrubs_by_strat_bytreatment_swap,
                         ncol=2,  nrow=1, 
                         rel_widths=c(7, 7, 7, 7), 
-                        align ="h", axis =bt, 
+                        align ="h", axis ="bt", 
                        labels=c("A", "B")
 )
 
 comp_legend<- plot_grid(compplots, legend, nrow=2, rel_heights = c(1, 0.1))
 comp_legend             
 
-ggsave(comp_legend, file="composition_comb_115.png", width = 32,
-       height = 20,
-       units = "cm", dpi=500)
+# ggsave(comp_legend, file="composition_comb_115.png", width = 32,
+#        height = 20,
+#        units = "cm", dpi=500)

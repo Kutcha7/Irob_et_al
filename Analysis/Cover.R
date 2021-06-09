@@ -11,6 +11,7 @@ library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all columns
 library(grid)
 library(gridExtra)
+library(cowplot)
 library(reshape2)
 library(scales)
 library(here)
@@ -221,9 +222,7 @@ plotCoverOverTime<- function(PFTcoverall) { # function for generating the combin
   
   barplot_list$Wildlife_high_bar
     
-   # Extract legend from this plot:
-  library(dplyr)
-  
+  # Extract legend from this plot:
   cattle_low_bar<-ggplot(subset(cover, scenario %in% "Cattle_low"),
                      aes(y = cover, x=scenario=="Cattle_low", fill=type)) +
     geom_col(color="whitesmoke", lwd=0.3)+
@@ -253,9 +252,6 @@ plotCoverOverTime<- function(PFTcoverall) { # function for generating the combin
     legend <- get_legend(cattle_low_bar)
   
   # arrange all plots and legend in one plot ---------------------    
-  library("gridExtra")
-      
-  library(cowplot)
       
       coverplots <- plot_grid(plot_list$Cattle_low_line,  barplot_list$Cattle_low_bar, plot_list$Wildlife_low_line, barplot_list$Wildlife_low_bar,  
                 plot_list$Cattle_high_line, barplot_list$Cattle_high_bar, plot_list$Wildlife_high_line, barplot_list$Wildlife_high_bar,
@@ -266,9 +262,6 @@ plotCoverOverTime<- function(PFTcoverall) { # function for generating the combin
                  )
     
      cover_legend<- plot_grid(coverplots, legend, nrow=2, rel_heights = c(1, 0.1)) 
-    
-     cover_legend
-      
     
     # ggsave(cover_legend, file="cover_combined_all_scenarios.png", width = 32,
     #        height = 20,

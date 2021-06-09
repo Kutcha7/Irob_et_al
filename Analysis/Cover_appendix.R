@@ -33,10 +33,9 @@ makeMeanCover <- function(PFTcoverall) {
   cover<-melt(cover, id.vars=c("year", "scenario"))
   
   
-  # take mean over all scenarios and climreps, here we want the mean cover of the last 20 years of simulation per scenario for each sub-PFT !!!
-  
-  cover<-aggregate(list(cover = cover$value, Richness=cover$Richness, diversity = cover$ShannonDiv), by = list(PFT = cover$variable, scenario=cover$scenario), FUN=mean)
-  
+  # take mean over all scenarios and climreps, here we want the mean cover of the 
+  # last 20 years of simulation per scenario for each sub-PFT !!!
+  cover <- aggregate(list(cover = cover$value), by = list(PFT = cover$variable, scenario = cover$scenario), FUN = mean)
   
   cover$type <- ifelse(grepl("(meanGCover)", cover$PFT),"Perennial", ifelse(grepl("(meanSCover)", cover$PFT),"Shrub", "Annual"))
   
@@ -225,19 +224,17 @@ plotCoverOverTime<- function(PFTcoverall) { # function to bring data in right fo
                           plot_list$Cattle_very_high_line, barplot_list$Cattle_very_high_bar, plot_list$Wildlife_very_high_line, barplot_list$Wildlife_very_high_bar,
                           ncol=4,  nrow=3, 
                           rel_widths=c(4, 1.5, 4, 1.5), 
-                          align ="h", axis =bt,
+                          align ="h", axis ="bt",
                           labels=c("A", "", "B", "", "C", "", "D", "", "E","", "F", "")
   )
   
   
   cover_legend<- plot_grid(coverplots, legend, nrow=2, rel_heights = c(1, 0.1)) #change nrow back to 2
+
   
-  
-  cover_legend
-  
-  ggsave(cover_legend, file="cover_appendix_76.png", width = 32,
-         height = 20,
-         units = "cm", dpi=500)
+  # ggsave(cover_legend, file="cover_appendix_76.png", width = 32,
+  #        height = 20,
+  #        units = "cm", dpi=500)
     
 
   return(cover_legend)

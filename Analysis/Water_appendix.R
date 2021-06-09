@@ -16,11 +16,8 @@ library(reshape2)
 library(scales)
 library(plotly)
 
-
-paths <- here::here("Data/Results/Appendix/")
-
 #### reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
+readfiles<- function() {
   files<- list.files(path = here::here("Data/Results/Appendix/"), pattern="yearly", full.names = T)
   
   

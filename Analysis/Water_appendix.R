@@ -114,9 +114,9 @@ PFTcoverall<-readfiles()
           panel.background = element_blank()) 
   Scatterplot_TET
   
-  ggsave(Scatterplot_TET, file="T_ET_cover_Appendix.png", width = 32,
-         height = 16,
-         units = "cm", dpi=450)
+  # ggsave(Scatterplot_TET, file="T_ET_cover_Appendix.png", width = 32,
+  #        height = 16,
+  #        units = "cm", dpi=450)
   
   # soil moisture --
   Scatterplot_ML1<-ggplot(WaterVals_mean, aes(x=totalCover_mean, y=ML1_mean, color=scenario, shape=scenario)) + 
@@ -137,5 +137,3 @@ PFTcoverall<-readfiles()
           panel.grid.major = element_line(size = 0.2, linetype = 'solid', colour = "gray"),
           panel.background = element_blank()) 
   Scatterplot_ML1
-  
-  

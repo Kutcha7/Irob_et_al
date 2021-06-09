@@ -21,34 +21,32 @@ source(here::here("R/Utility.R"))
 PFTcoverall <- readfiles(path = "Data/Results/Appendix")
 
 makeMeanCover <- function(PFTcoverall) {
-  
-  
-  cover<-select(PFTcoverall,contains("Cover"), c("year", "scenario", "climrep"))
-  cover<-select(cover,starts_with("mean"), c("year", "scenario"))
-  
-  cover<-cover[, !names(cover) %in% c("meanGtotalcover", "meanAtotalcover", "meanStotalcover"), drop=F ]
-  
-  cover <- cover %>% filter(year> 79) 
-  
-  cover<-melt(cover, id.vars=c("year", "scenario"))
-  
-  
-  # take mean over all scenarios and climreps, here we want the mean cover of the 
+  cover <- select(PFTcoverall, contains("Cover"), c("year", "scenario", "climrep"))
+  cover <- select(cover, starts_with("mean"), c("year", "scenario"))
+
+  cover <- cover[, !names(cover) %in% c("meanGtotalcover", "meanAtotalcover", "meanStotalcover"), drop = F]
+
+  cover <- cover %>% filter(year > 79)
+
+  cover <- melt(cover, id.vars = c("year", "scenario"))
+
+
+  # take mean over all scenarios and climreps, here we want the mean cover of the
   # last 20 years of simulation per scenario for each sub-PFT !!!
   cover <- aggregate(list(cover = cover$value), by = list(PFT = cover$variable, scenario = cover$scenario), FUN = mean)
-  
-  cover$type <- ifelse(grepl("(meanGCover)", cover$PFT),"Perennial", ifelse(grepl("(meanSCover)", cover$PFT),"Shrub", "Annual"))
-  
+
+  cover$type <- ifelse(grepl("(meanGCover)", cover$PFT), "Perennial", ifelse(grepl("(meanSCover)", cover$PFT), "Shrub", "Annual"))
+
   # rename PFTs
-  cover$PFT<-as.character(cover$PFT) # this is important otherwise it will error
-  cover$PFT[cover$PFT=="meanACover0"]<-"Base_A"
-  
+  cover$PFT <- as.character(cover$PFT) # this is important otherwise it will error
+  cover$PFT[cover$PFT == "meanACover0"] <- "Base_A"
+
   cover <- renamePFT_grass(cover)
   cover <- renamePFT_shrub(cover)
 
-  # Cover  in percentage instead of 0-1  
-  cover$cover<-cover$cover*100
-  
+  # Cover  in percentage instead of 0-1
+  cover$cover <- cover$cover * 100
+
   return(cover)
 }
 

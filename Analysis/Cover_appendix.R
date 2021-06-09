@@ -7,15 +7,13 @@
 rm(list=ls()) # clears working environment 
 
 
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all coloums
-library(ggplot2)
 library(grid)
 library(gridExtra)
 library(reshape2)
-library(tidyverse)
 library(scales)
+library(cowplot)
 
 
 paths <- here::here("Data/Results/Appendix/")
@@ -236,7 +234,6 @@ plotCoverOverTime<- function(PFTcoverall) { # function to bring data in right fo
 
   
       # Arrange ggplot2 with adapted height and width for each row and column :
-    library(dplyr)
     # plot for legend -------------
       cover$type <- factor(cover$type, levels=c( "Annual", "Perennial", "Shrub"))
       cattle_low_bar<-ggplot(subset(cover, scenario %in% "Cattle very low"),
@@ -270,7 +267,7 @@ plotCoverOverTime<- function(PFTcoverall) { # function to bring data in right fo
     
  
     
-  library(cowplot)
+
   # arrange all line and barplots in one aggregated figure
   coverplots <- plot_grid(plot_list$Cattle_very_low_line,  barplot_list$Cattle_very_low_bar,  
                           plot_list$Wildlife_very_low_line, barplot_list$Wildlife_very_low_bar,  

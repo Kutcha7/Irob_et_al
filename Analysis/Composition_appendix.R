@@ -58,29 +58,8 @@ cover$scenario<- factor(cover$scenario, levels=c('Cattle very low', 'Wildlife ve
 # rename PFTs
 cover$PFT<-as.character(cover$PFT) # this is important otherwise it will error
 
-cover$PFT[cover$PFT=="meanGCover0"]<-"Base"
-cover$PFT[cover$PFT=="meanGCover1"]<-"Cb"
-cover$PFT[cover$PFT=="meanGCover2"]<-"Cp"
-cover$PFT[cover$PFT=="meanGCover3"]<-"Pr"
-cover$PFT[cover$PFT=="meanGCover4"]<-"Pb"
-cover$PFT[cover$PFT=="meanGCover5"]<-"Rb"
-cover$PFT[cover$PFT=="meanGCover6"]<-"Rp"
-cover$PFT[cover$PFT=="meanGCover7"]<-"Bp"
-cover$PFT[cover$PFT=="meanGCover8"]<-"Bd"
-
-
-
-cover$PFT[cover$PFT=="meanSCover0"]<-"Base"
-cover$PFT[cover$PFT=="meanSCover1"]<-"Cb"
-cover$PFT[cover$PFT=="meanSCover2"]<-"Rd"
-cover$PFT[cover$PFT=="meanSCover3"]<-"Rc"
-cover$PFT[cover$PFT=="meanSCover4"]<-"Bd"
-cover$PFT[cover$PFT=="meanSCover5"]<-"Bc"
-cover$PFT[cover$PFT=="meanSCover6"]<-"Bp"
-cover$PFT[cover$PFT=="meanSCover7"]<-"Dc"
-cover$PFT[cover$PFT=="meanSCover8"]<-"Db"
-cover$PFT[cover$PFT=="meanSCover9"]<-"Dr"
-cover$PFT[cover$PFT=="meanSCover10"]<-"Mb"
+cover <- renamePFT_grass(cover)
+cover <- renamePFT_shrub(cover)
 
 namesShrubs <- c("Base", "Base", "Cb", "Cb", "Rd", "Rd", "Rc", "Rc", "Bd", "Bd",  "Bc", "Bc", "Bp", "Bp",  "Dc", "Dc", "Db", "Db", "Dr", "Dr", "Mb", "Mb")
 

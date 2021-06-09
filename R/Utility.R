@@ -26,3 +26,33 @@ readfiles <- function(path) {
 
   return(PFTs)
 }
+
+# Function to rename grass pfts to reflect strategies in a dataframe
+renamePFT_grass <- function(df){
+  df$PFT[df$PFT=="meanGCover0"]<-"Base"
+  df$PFT[df$PFT=="meanGCover1"]<-"Cb"
+  df$PFT[df$PFT=="meanGCover2"]<-"Cp"
+  df$PFT[df$PFT=="meanGCover3"]<-"Pr"
+  df$PFT[df$PFT=="meanGCover4"]<-"Pb"
+  df$PFT[df$PFT=="meanGCover5"]<-"Rb"
+  df$PFT[df$PFT=="meanGCover6"]<-"Rp"
+  df$PFT[df$PFT=="meanGCover7"]<-"Bp"
+  df$PFT[df$PFT=="meanGCover8"]<-"Bd"
+  return(df)
+}
+
+# Function to rename shrub pfts to reflect strategies in a dataframe
+renamePFT_shrub <- function(df){
+  df$PFT[df$PFT=="meanSCover0"]<-"Base"
+  df$PFT[df$PFT=="meanSCover1"]<-"Cb"
+  df$PFT[df$PFT=="meanSCover2"]<-"Rd"
+  df$PFT[df$PFT=="meanSCover3"]<-"Rc"
+  df$PFT[df$PFT=="meanSCover4"]<-"Bd"
+  df$PFT[df$PFT=="meanSCover5"]<-"Bc"
+  df$PFT[df$PFT=="meanSCover6"]<-"Bp"
+  df$PFT[df$PFT=="meanSCover7"]<-"Dc"
+  df$PFT[df$PFT=="meanSCover8"]<-"Db"
+  df$PFT[df$PFT=="meanSCover9"]<-"Dr"
+  df$PFT[df$PFT=="meanSCover10"]<-"Mb"
+  return(df)
+}

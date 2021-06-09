@@ -66,7 +66,7 @@ cover<-cover[, !names(cover) %in% c("meanGtotalcover", "meanAtotalcover", "meanS
 
 cover <- cover %>% filter(year> 79) 
 
-cover<-melt(cover, id.vars=c("year", "scenario", "climrep"))
+cover<-reshape2::melt(cover, id.vars=c("year", "scenario", "climrep"))
 
 cover <- cover %>% 
   rename(
@@ -214,15 +214,13 @@ Evenness
 
 ## combine plots ------
 
-library(cowplot)
-
 richness <-richness + theme(legend.position="none") # remove legend 
 
 # combine plot
 richevenplots <- plot_grid(richness, Evenness,
                            ncol=2,  nrow=1, 
                            rel_widths=c(12, 12), 
-                           align ="h", axis= bt,
+                           align ="h", axis= "bt",
                            labels =c("A", "B")
 )
 
@@ -230,7 +228,7 @@ biodivricheven_legend<- plot_grid(richevenplots, legend, nrow=2, rel_heights = c
 biodivricheven_legend             
 
 
-ggsave(biodivricheven_legend, file="richness_evenness_appendix_76.png", width = 32,
-       height = 18,
-       units = "cm", dpi=500)
+# ggsave(biodivricheven_legend, file="richness_evenness_appendix_76.png", width = 32,
+#        height = 18,
+#        units = "cm", dpi=500)
 

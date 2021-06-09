@@ -15,11 +15,8 @@ library(reshape2)
 library(scales)
 library(here)
 
-
-paths <- here::here("Data/Results/")
-
 ####reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
+readfiles<- function() {
   files<- list.files(path = here::here("Data/Results/"), pattern="yearly", full.names = T)
   
   outputfiles<-lapply(files, function(x) {
@@ -265,7 +262,7 @@ plotCoverOverTime<- function(PFTcoverall) { # function for generating the combin
                 ncol=4,  nrow=2, 
                 rel_widths=c(4, 1.5, 4, 1.5), 
                 labels=c("a", "", "b", "", "c", "", "d", ""),
-                align ="h", axis =bt
+                align ="h", axis ="bt"
                  )
     
      cover_legend<- plot_grid(coverplots, legend, nrow=2, rel_heights = c(1, 0.1)) 
@@ -273,9 +270,9 @@ plotCoverOverTime<- function(PFTcoverall) { # function for generating the combin
      cover_legend
       
     
-    ggsave(cover_legend, file="cover_combined_all_scenarios.png", width = 32,
-           height = 20,
-           units = "cm", dpi=500)
+    # ggsave(cover_legend, file="cover_combined_all_scenarios.png", width = 32,
+    #        height = 20,
+    #        units = "cm", dpi=500)
 
   return(cover_legend)
   

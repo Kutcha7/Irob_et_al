@@ -16,31 +16,9 @@ library(reshape2)
 library(scales)
 library(here)
 
-####reading in all outputfiles returned as one dataframe 
-readfiles <- function() {
-  files <- list.files(path = here::here("Data/Results/"), pattern = "yearly", full.names = T)
+source(here::here("R/Utility.R"))
 
-  outputfiles <- lapply(files, function(x) {
-    read.table(file = x, header = T, sep = "\t", skipNul = TRUE)
-  })
-
-  scenarios <- as.list(gsub(".*EH_\\s*|_.*", "", files)) # extracting scenario from file name
-  climrep <- as.list(gsub(".*climrep-\\s*|_.*", "", files)) # extracting climate repetition from file name
-
-  PFTs <- Map(cbind, outputfiles, scenario = scenarios, climrep = climrep) # adding extra column with scenario name
-  PFTs <- do.call("rbind", PFTs) # merging list into df
-
-  PFTs <- select(PFTs, contains("Cover"), c("year", "scenario", "climrep"))
-  PFTs <- select(PFTs, starts_with("mean"), c("year", "scenario", "climrep"))
-
-  no <- c("meanRCover")
-  PFTs <- PFTs[, !names(PFTs) %in% no, drop = F] # drop =F means that it should be a df not a list
-
-
-  return(PFTs)
-}
-
-PFTcoverall <- readfiles()
+PFTcoverall <- readfiles(path = "Data/Results")
 
 makeMeanCover <- function(PFTcoverall) {
   cover <- select(PFTcoverall, contains("Cover"), c("year", "scenario", "climrep"))

@@ -15,15 +15,15 @@ For any questions regarding the R-Scripts please contact <a href="mailto:irob.k@
 
 | Script        | Description   | 
 | ------------- |-------------| 
-| Analysis/Coverplots.R | Script to visualise and analyse the meta-PFT cover time series for the land use scenarios used in the main part of the manuscript | 
-| Analysis/Coverplots_appendix.R| Script to create the meta-PFT cover time series for all other land use scenarios presented in the appendix | 
-| Analysis/Composition_plots.R| Script to visualise and analyse the strategy-type composition of the last 20 years of simulation for each scenario used in the main part of the manuscript|
+| Analysis/Cover.R | Script to visualise and analyse the meta-PFT cover time series for the land use scenarios used in the main part of the manuscript | 
+| Analysis/Cover_appendix.R| Script to create the meta-PFT cover time series for all other land use scenarios presented in the appendix | 
+| Analysis/Composition.R| Script to visualise and analyse the strategy-type composition of the last 20 years of simulation for each scenario used in the main part of the manuscript|
 | Analysis/Composition_appendix.R| Script to visualise the strategy-type composition of the last 20 years of simulation for additional scenarios presented in the appendix |
-| Analysis/Richness_evenness.R| Generation of richness and evenness values, visualisation and analysation of the data of the last 20 years of simulation for each scenario used in the main part of the manuscript|
-| Analysis/Richness_evenness_appendix.R| Generation of richness and evenness values and visualisation of the data of the last 20 years of simulation for additional scenarios presented in the appendix |
+| Analysis/Richness_Evenness.R| Generation of richness and evenness values, visualisation and analysation of the data of the last 20 years of simulation for each scenario used in the main part of the manuscript|
+| Analysis/Richness_Evenness_appendix.R| Generation of richness and evenness values and visualisation of the data of the last 20 years of simulation for additional scenarios presented in the appendix |
 | Analysis/EFA.R| Exploratory factor analysis to determine clusters depending on plant strategies. Additional calculation of functional dispersion (FDis) and visualisation of PFT clusters including individual abundance and distance to centroid for the main scenarios |
-| Analysis/Waterplots.R | Calculation of T/ET, visualisation of T/ET and soil moisture and statistical evaluation for the main scenarios |
-| Analysis/Waterplots_appendix.R | Calculation of T/ET, visualisation of T/ET and soil moisture for all additional scenarios |
+| Analysis/Water.R | Calculation of T/ET, visualisation of T/ET and soil moisture and statistical evaluation for the main scenarios |
+| Analysis/Water_appendix.R | Calculation of T/ET, visualisation of T/ET and soil moisture for all additional scenarios |
 | Sensitivity/Parameterisation_sensitivity_browse.R | Merging sensitivity output for all parameters and climate repetitions, determining parameter value at desired cover change based on linear regression analysis, visualisation of output for browsing scenarios | 
 | Sensitivity/Parameterisation_sensitivity_graze.R | Merging sensitivity output for all parameters and climate repetitions, determining parameter value at desired cover change based on linear regression analysis, visualisation of output for grazing scenarios | 
 
@@ -51,7 +51,7 @@ Model source files  can be found in */Source*. To reproduce examples, download r
 | modelscenarios.txt  | Scenarios, climate repetitions and repetitions are determined here. 
 Input files will be chosen and output files will be coded based on IDs and repetitions you indicate here.|
 | soilparameters_EH.txt | Soil parameters for loamy sand, calibrated for Etosha Heights. |  
-| vegetationsparameters_*ScenarioName*.txt | General vegetation  parameters and specific parameters for the PFTs shrubs, perennial and annual grasses. Sub-types are generated here. | 
+| vegetationparameters_*ScenarioName*.txt | General vegetation  parameters and specific parameters for the PFTs shrubs, perennial and annual grasses. Sub-types are generated here. | 
 
 ##  Folder /Weather
 
@@ -72,10 +72,10 @@ The folders *Browse* and *Graze* hold the single result  files  of  the  sensiti
 
 | File        | Description   | 
 | ------------- |-------------|
-|/Browse/perennials_sensoutput_**ParameterName**_**Date**.txt |  Cover  change  of  perennial grasses in response  to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).|
-|/Browse/shrubss_sensoutput_**ParameterName**_**Date**.txt | Cover  change  of  shrubs in response  to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP). |
-|/Graze/perennials_sensoutput_**ParameterName**_**Date**.txt |  Cover  change  of  perennial grasses in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).|
-|/Graze/shrubss_sensoutput_**ParameterName**_**Date**.txt | Cover  change  of  shrubs in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP). |
+|/Browse/perennials_sensoutput_**ParameterName**.txt |  Cover  change  of  perennial grasses in response  to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).|
+|/Browse/shrubss_sensoutput_**ParameterName**.txt | Cover  change  of  shrubs in response  to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP). |
+|/Graze/perennials_sensoutput_**ParameterName**.txt |  Cover  change  of  perennial grasses in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).|
+|/Graze/shrubss_sensoutput_**ParameterName**.txt | Cover  change  of  shrubs in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP). |
 
 ## Folder /Parms
 

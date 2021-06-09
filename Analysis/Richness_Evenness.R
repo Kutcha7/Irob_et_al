@@ -10,54 +10,21 @@
 
 rm(list=ls()) # clears working environment 
 
-
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all coloums
-library(ggplot2)
 library(grid)
 library(gridExtra)
 library(reshape2)
-library(tidyverse)
 library(scales)
 library(gtable)
 library(cowplot)
 library(data.table)
 library(vegan)
+library(cowplot)
 
-# setting working directory --
-paths <- here::here("Data/Results/")
+# Read data
 
-####reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
-  files<- list.files(path = here::here("Data/Results/"), pattern="yearly", full.names = T)
-  
-  outputfiles<-lapply(files, function(x) {
-    read.table(file=x, header=T, skipNul = TRUE) 
-  })
-  
-  
-  scenarios<-as.list(gsub(".*EH_\\s*|_.*", "", files))
-  climrep<-as.list(gsub(".*climrep-\\s*|_.*", "", files))
-  
-  PFTs<-Map(cbind, outputfiles, scenario=scenarios, climrep = climrep) # adding extra column with scenario name 
-  PFTs<-do.call("rbind", PFTs) # merging list into df
-  
-  
-  PFTs<-select(PFTs,contains("Cover"), c("year",  "scenario", "climrep")) # select only parameters of interest
-  PFTs<-select(PFTs,starts_with("mean"), c("year", "scenario", "climrep"))
-  
-  
-  no<-c("meanRCover")
-  PFTs<-PFTs[, !names(PFTs) %in% no, drop=F ] # drop =F means that it should be a df not a list
-  
-  
-  
-  return(PFTs)
-}
-
-PFTcoverall<-readfiles()
-
+PFTcoverall <- readfiles(path = "Data/Results")
 
 # ==============================================
 # ------- Calc mean Richness based on cover of last 20 years for all scenarios
@@ -214,7 +181,7 @@ Evenness
 
 ## combine plots ------
 
-library(cowplot)
+
 
 # remove legends 
 richness <-richness + theme(legend.position="none")
@@ -223,7 +190,7 @@ Evenness <- Evenness + theme(legend.position="none")
 richevenplots <- plot_grid(richness, Evenness,
                            ncol=2,  nrow=1, 
                            rel_widths=c(12, 12), 
-                           align ="h", axis= bt,
+                           align ="h", axis= "bt",
                            labels =c("a", "b")
 )
 
@@ -231,9 +198,9 @@ biodivricheven_legend<- plot_grid(richevenplots, legend, nrow=2, rel_heights = c
 biodivricheven_legend             
 
 
-ggsave(biodivricheven_legend, file="richness_evenness_264.png", width = 34,
-       height = 16,
-       units = "cm", dpi=500)
+# ggsave(biodivricheven_legend, file="richness_evenness_264.png", width = 34,
+#        height = 16,
+#        units = "cm", dpi=500)
 
 
 

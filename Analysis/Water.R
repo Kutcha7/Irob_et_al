@@ -178,9 +178,9 @@ anova(lm1, lm0) # compare with null model -> p < 0.01
   Scatterplot
   
   # save plot 
-  ggsave(Scatterplot, file="T_ET_cover.png", width = 32,
-         height = 16,
-         units = "cm", dpi=450)
+  # ggsave(Scatterplot, file="T_ET_cover.png", width = 32,
+  #        height = 16,
+  #        units = "cm", dpi=450)
   
   # soil moisutre --
   Scatterplot_ML1<-ggplot(WaterVals_mean, aes(x=totalCover_mean, y=ML1_mean, color=scenario, shape=scenario)) + 
@@ -280,7 +280,7 @@ anova(lm1, lm0) # compare with null model -> p < 0.01
           legend.background = element_blank(),
           panel.grid.major = element_line(size = 0.2, linetype = 'solid', colour = "gray"),
           panel.background = element_blank()) 
-  Scatterplo_EP
+  Scatterplot_EP
   
   # transpiration --
   Scatterplot_TP<-ggplot(WaterVals_mean, aes(x=totalCover_mean, y=AnnualtranspirationL1_mean, color=scenario, shape=scenario)) + 
@@ -301,5 +301,3 @@ anova(lm1, lm0) # compare with null model -> p < 0.01
           panel.grid.major = element_line(size = 0.2, linetype = 'solid', colour = "gray"),
           panel.background = element_blank()) 
   Scatterplot_TP
-  
- 

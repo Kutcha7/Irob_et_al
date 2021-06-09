@@ -67,7 +67,7 @@ PFTcoverall<-readfiles()
   
   # take mean over all scenarios and climreps, here we want the mean cover of the last 20 years of simulation per scenario for each sub-PFT !!!
   
-  cover<-aggregate(list(cover = cover$value, Richness=cover$Richness, diversity = cover$ShannonDiv), by = list(PFT = cover$variable, scenario=cover$scenario), FUN=mean)
+  cover<-aggregate(list(cover = cover$value), by = list(PFT = cover$variable, scenario=cover$scenario), FUN=mean)
   
   
   cover$type <- ifelse(grepl("(meanGCover)", cover$PFT),"Perennial", ifelse(grepl("(meanSCover)", cover$PFT),"Shrub", "Annual"))
@@ -245,6 +245,7 @@ plotCoverOverTime<- function(PFTcoverall) { # function to bring data in right fo
         ylim(0, 100) +
         ylab(bquote("Mean cover"))+
         scale_fill_manual(values = cols)+
+        theme_set(theme_minimal())+
         theme(axis.text.x = element_blank(),
               axis.text.y = element_text(size=12),
               axis.title.y= element_blank(),

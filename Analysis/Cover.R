@@ -7,15 +7,11 @@
 
 rm(list=ls()) # clears working environment 
 
-
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 options(dplyr.width = Inf) #enables head() to display all columns
-library(ggplot2)
 library(grid)
 library(gridExtra)
 library(reshape2)
-library(tidyverse)
 library(scales)
 library(here)
 

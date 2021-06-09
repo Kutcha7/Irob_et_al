@@ -22,6 +22,8 @@ library(data.table)
 library(vegan)
 library(cowplot)
 
+source(here::here("R/Utility.R"))
+
 # Read data
 
 PFTcoverall <- readfiles(path = "Data/Results")

@@ -15,6 +15,8 @@ library(data.table)
 
 source(here::here("R/Utility.R"))
 
+# Read results
+
 PFTcoverall<-readfiles(path = "Data/Results/Appendix")
 
 # bringing the df in the right format -------------- 
@@ -241,8 +243,6 @@ legend <- get_legend(perennials_by_strat_bytreatment_swap)
 perennials_by_strat_bytreatment_swap <- perennials_by_strat_bytreatment_swap + theme(legend.position="none")
 shrubs_by_strat_bytreatment_swap <- shrubs_by_strat_bytreatment_swap + theme(legend.position="none")
 
-
-library(cowplot)
 
 compplots <- plot_grid(perennials_by_strat_bytreatment_swap, shrubs_by_strat_bytreatment_swap,
                         ncol=2,  nrow=1, 

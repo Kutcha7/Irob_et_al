@@ -19,37 +19,11 @@ library(cowplot)
 library(data.table)
 library(cowplot)
 
-# setting working directory --
-paths <- here::here("Data/Results/")
+source(here::here("R/Utility.R"))
 
-####reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
-  files<- list.files(path = here::here("Data/Results/"), pattern="yearly", full.names = T)
-  
-  outputfiles<-lapply(files, function(x) {
-    read.table(file=x, header=T, skipNul = TRUE) 
-  })
-  
-  
-  scenarios<-as.list(gsub(".*EH_\\s*|_.*", "", files))
-  climrep<-as.list(gsub(".*climrep-\\s*|_.*", "", files))
-  
-  PFTs<-Map(cbind, outputfiles, scenario=scenarios, climrep = climrep) # adding extra column with scenario name 
-  PFTs<-do.call("rbind", PFTs) # merging list into df
-  
-  
-  PFTs<-select(PFTs,contains("Cover"), c("year", "scenario", "climrep")) # extracting only parameters of interest 
-  PFTs<-select(PFTs,starts_with("mean"), c("year", "scenario", "climrep"))
-  
-  
-  no<-c("meanRCover")
-  PFTs<-PFTs[, !names(PFTs) %in% no, drop=F ] # drop =F means that it should be a df not a list
-  
-  
-  return(PFTs)
-}
+# Read data and calculate mean cover per scenario and sub-pft for last 20 years
 
-PFTcoverall<-readfiles()
+PFTcoverall <- readfiles(path = "Data/Results")
 
 # bringing the df in the right format -------------- 
 
@@ -60,7 +34,7 @@ cover<-cover[, !names(cover) %in% c("meanGtotalcover", "meanAtotalcover", "meanS
 
 cover <- cover %>% filter(year> 79) # only include last 20 years of simulation 
 
-cover<-melt(cover, id.vars=c("year", "scenario"))
+cover<-reshape2::melt(cover, id.vars=c("year", "scenario"))
 
 cover <- cover %>% # rename melted columns
   rename(
@@ -89,29 +63,8 @@ cover$scenario = factor(cover$scenario, levels=c('Cattle high','Cattle low','Wil
 # rename PFTs
 cover$PFT<-as.character(cover$PFT) # this is important otherwise it will error
 
-cover$PFT[cover$PFT=="meanGCover0"]<-"Base"
-cover$PFT[cover$PFT=="meanGCover1"]<-"Cb"
-cover$PFT[cover$PFT=="meanGCover2"]<-"Cp"
-cover$PFT[cover$PFT=="meanGCover3"]<-"Pr"
-cover$PFT[cover$PFT=="meanGCover4"]<-"Pb"
-cover$PFT[cover$PFT=="meanGCover5"]<-"Rb"
-cover$PFT[cover$PFT=="meanGCover6"]<-"Rp"
-cover$PFT[cover$PFT=="meanGCover7"]<-"Bp"
-cover$PFT[cover$PFT=="meanGCover8"]<-"Bd"
-
-
-
-cover$PFT[cover$PFT=="meanSCover0"]<-"Base"
-cover$PFT[cover$PFT=="meanSCover1"]<-"Cb"
-cover$PFT[cover$PFT=="meanSCover2"]<-"Rd"
-cover$PFT[cover$PFT=="meanSCover3"]<-"Rc"
-cover$PFT[cover$PFT=="meanSCover4"]<-"Bd"
-cover$PFT[cover$PFT=="meanSCover5"]<-"Bc"
-cover$PFT[cover$PFT=="meanSCover6"]<-"Bp"
-cover$PFT[cover$PFT=="meanSCover7"]<-"Dc"
-cover$PFT[cover$PFT=="meanSCover8"]<-"Db"
-cover$PFT[cover$PFT=="meanSCover9"]<-"Dr"
-cover$PFT[cover$PFT=="meanSCover10"]<-"Mb"
+cover <- renamePFT_grass(cover)
+cover <- renamePFT_shrub(cover)
 
 namesShrubs <- c("Base", "Base", "Cb", "Cb", "Rd", "Rd", "Rc", "Rc", "Bd", "Bd",  "Bc", "Bc", "Bp", "Bp",  "Dc", "Dc", "Db", "Db", "Dr", "Dr", "Mb", "Mb")
 

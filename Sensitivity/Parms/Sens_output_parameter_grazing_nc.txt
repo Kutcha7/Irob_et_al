@@ -1,0 +1,15 @@
+PFT	Parameter	default 
+Perennial	estW	1.05
+Perennial	grazeLim	0.15
+Perennial	grazePrefer	1
+Perennial	MortR	0.54
+Perennial	Transcoef	0.5
+Perennial	UptakeRate	0.9
+Perennial	WP	0.077
+Shrub	estW	1.205
+Shrub	grazeLim	0.95
+Shrub	grazePrefer	0.2
+Shrub	MortR	0.12
+Shrub	Transcoef	0.15
+Shrub	UptakeRate	0.5
+Shrub	WP	0.076

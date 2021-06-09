@@ -21,10 +21,8 @@ library(cowplot)
 library(data.table)
 library(vegan)
 
-paths <- here::here("Data/Results/Appendix/")
-
 #### reading in all outputfiles returned as one dataframe 
-readfiles<- function(path=paths) {
+readfiles<- function() {
   files<- list.files(path = here::here("Data/Results/Appendix/"), pattern="yearly", full.names = T)
   
   

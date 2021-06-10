@@ -14,7 +14,7 @@ library(grid)
 library(gridExtra)
 library(reshape2)
 library(scales)
-library(plotly)
+
 
 #### reading in all outputfiles returned as one dataframe
 readfiles <- function() {
@@ -31,7 +31,7 @@ readfiles <- function() {
   PFTs <- Map(cbind, outputfiles, scenario = scenarios, climrep = climrep) # adding extra column with scenario name
   PFTs <- do.call("rbind", PFTs) # merging list into df
 
-  ##### evaporation########
+  ##### T/ET
 
   PFTs$wateravailability <- PFTs$AnnualtranspirationL1 / (PFTs$Annualevaporation + PFTs$AnnualtranspirationL1)
   PFTs$wateravailability2 <- PFTs$AnnualtranspirationL2 / (PFTs$Annualevaporation + PFTs$AnnualtranspirationL2)
@@ -81,6 +81,7 @@ lm1 <- lm(wateravailability ~ totalCover + scenario + totalCover:scenario, data 
 lm0 <- lm(wateravailability ~ 1, data = cover)
 
 summary(lm1)
+# explanatory parameters in lm1 explain 88.6% of variation
 
 plot(lm1) # check assumptions
 
@@ -100,24 +101,23 @@ cohen.d(cover$wateravailability, cover$landuse)
 LM1 <- lm(ML1 ~ totalCover + scenario + totalCover:scenario, data = cover)
 LM0 <- lm(ML1 ~ 1, data = cover)
 
+summary(LM1)
+# parameters in LM1 explain 68% of variation
+
+plot(LM1) # check assumptions, distribution of residuls etc
+
+anova(LM1, LM0) # compare with null model -> p < 0.01
+
 # welch-anova for unequal variances --
 
 library(rstatix)
-
-cover %>%
-  group_by(scenario) %>%
-  welch_anova_test(ML1 ~ totalCover)
 
 oneway.test(ML1 ~ scenario,
   data = cover,
   var.equal = FALSE
 )
 
-summary(LM1)
-
-plot(LM1) # check assumptions, distribution of residuls etc
-
-anova(lm1, lm0) # compare with null model -> p < 0.01
+# no differences of soil moisture between scenarios (F = 0.84, 3,1331.1, p > 0.05)
 
 
 ### plots -----------------------------------

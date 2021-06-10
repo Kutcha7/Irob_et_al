@@ -43,7 +43,8 @@ files <- dir("~/Input/Graze/")
 setwd("~/Split_files_graze/")
 parms <- read.table("~/Parms/Sens_output_parameter_grazing_nc.txt", header = T, sep="\t")
 
-PFT <-as.list(gsub("_sensoutput.*", "", files))############ hier pattern einf?gen
+PFT <-as.list(gsub("_sensoutput.*", "", files))
+# make sure split files folders (graze + browse) are empty!!! -----------
 setwd("~/Split_files_graze/")#######
 
 

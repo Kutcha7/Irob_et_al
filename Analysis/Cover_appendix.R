@@ -27,7 +27,6 @@ meanCover <- makeMeanCover(df = PFTcoverall)
 # ------- Plotting cover over time for all scenarios
 # ===================================================
 
-plotCoverOverTime <- function(PFTcoverall) { # function to bring data in right format, create line and barplot and combine them in one aggregated plot
 
   cover <- PFTcoverall[, c("year", "meanGtotalcover", "meanStotalcover", "meanAtotalcover", "scenario")]
 
@@ -215,8 +214,4 @@ plotCoverOverTime <- function(PFTcoverall) { # function to bring data in right f
   #        units = "cm", dpi=500)
 
 
-  return(cover_legend)
-}
-
-plotCoverOverTime(PFTcoverall)
 

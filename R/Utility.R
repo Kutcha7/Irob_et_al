@@ -20,7 +20,7 @@ readfiles <- function(path) {
 
 
   no <- c("meanRCover")
-  PFTs <- PFTs[, !names(PFTs) %in% no, drop = F] # drop =F means that it should be a df not a list
+  PFTs <- PFTs[, !names(PFTs) %in% no, drop = F] # drop = F means that it should be a df not a list
 
 
 

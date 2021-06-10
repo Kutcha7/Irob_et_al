@@ -21,7 +21,7 @@ For any questions regarding the R-Scripts please contact <a href="mailto:irob.k@
 | Analysis/Composition_appendix.R| Script to visualise the strategy-type composition of the last 20 years of simulation for additional scenarios presented in the appendix |
 | Analysis/Richness_Evenness.R| Generation of richness and evenness values, visualisation and analysation of the data of the last 20 years of simulation for each scenario used in the main part of the manuscript|
 | Analysis/Richness_Evenness_appendix.R| Generation of richness and evenness values and visualisation of the data of the last 20 years of simulation for additional scenarios presented in the appendix |
-| Analysis/EFA.R| Exploratory factor analysis to determine clusters depending on plant strategies. Additional calculation of functional dispersion (FDis) and visualisation of PFT clusters including individual abundance and distance to centroid for the main scenarios |
+| Analysis/EFA_Clusters.R| Exploratory factor analysis to determine clusters depending on plant strategies. Additional calculation of functional dispersion (FDis) and visualisation of PFT clusters including individual abundance and distance to centroid for the main scenarios |
 | Analysis/Water.R | Calculation of T/ET, visualisation of T/ET and soil moisture and statistical evaluation for the main scenarios |
 | Analysis/Water_appendix.R | Calculation of T/ET, visualisation of T/ET and soil moisture for all additional scenarios |
 | Sensitivity/Parameterisation_sensitivity_browse.R | Merging sensitivity output for all parameters and climate repetitions, determining parameter value at desired cover change based on linear regression analysis, visualisation of output for browsing scenarios | 
@@ -37,6 +37,17 @@ This folder contains model output files for grazing and browsing scenarios for t
 | File        | Description   | 
 | ------------- |-------------| 
 |EH_100years_yearly_EH_SR20/40browse/graze_climrep-x.txt | EcoHyD simulation output for 100 years based on environmental conditions at Etosha Heights, Namibia. <br> **Year**: year from 0-99 <br> **meanGcover_x**: mean perennial grass cover of strategy types 0-9 [-] <br> **meanScover_x**: mean shrub cover of strategy types 0-11 [-] <br> **meanAcover_x**: mean annual grass cover of base-type [-] <br> **meanGtotalcover**: total perennial grass cover [-] <br> **meanStotalcover**: total shrub cover [-] <br> **meanAtotalcover**: total annual grass cover [-] <br> **Annualevaporation**: total annual evaporation [Vol%] <br> **AnnualtranspirationL1**: total annual plant transpiration of layer 1 [Vol%] <br> **ML1**: soil moisture in layer 1 during rainy season [Vol%] |
+
+### Folder /Matrices_for_EFA
+
+Matrices used for calculation of functional dispersion as part of the factor analysis in script */Analysis/EFA_Clusters.R*.
+
+| File        | Description   | 
+| ------------- |-------------| 
+| cattle_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each grazing scenario (rows) |
+| trait_matrix_cattle.txt | Matrix containing plant strategy-type trait values used for parameterisation in grazing scenarios |
+| wildlife_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each browsing scenario (rows) |
+| trait_matrix_wildlife.txt | Matrix containing plant strategy-type trait values used for parameterisation in browsing scenarios |
 
 # Folder /Model
 
@@ -62,6 +73,12 @@ Climate input data for EcoHyD. Precipitation and temperature time series generat
 | EH_100years_control_climrep-*1-30*.txt |  Climate files at hourly resolution in Y (year), M (month), D (day), H (hour)  format. <br> **Rain**: Hourly precipitation amount  [mm] <br> **Temp**: Hourly temperature  [°C] |
 
 
+## Folder R 
+
+| File        | Description   | 
+| ------------- |-------------|
+| Utility.R |  R script to extract often repeating functions from, e.g. reading in data, renaming species, etc. |
+
 
 
 ## Folder /Sensitivity
@@ -77,7 +94,7 @@ The folders *Browse* and *Graze* hold the single result  files  of  the  sensiti
 |/Graze/perennials_sensoutput_**ParameterName**.txt |  Cover  change  of  perennial grasses in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).|
 |/Graze/shrubss_sensoutput_**ParameterName**.txt | Cover  change  of  shrubs in response  to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP). |
 
-## Folder /Parms
+### Folder /Parms
 
 | File        | Description   | 
 | ------------- |-------------|

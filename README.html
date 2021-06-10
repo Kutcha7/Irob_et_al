@@ -186,15 +186,15 @@ pre code {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Analysis/Coverplots.R</td>
+<td>Analysis/Cover.R</td>
 <td>Script to visualise and analyse the meta-PFT cover time series for the land use scenarios used in the main part of the manuscript</td>
 </tr>
 <tr class="even">
-<td>Analysis/Coverplots_appendix.R</td>
+<td>Analysis/Cover_appendix.R</td>
 <td>Script to create the meta-PFT cover time series for all other land use scenarios presented in the appendix</td>
 </tr>
 <tr class="odd">
-<td>Analysis/Composition_plots.R</td>
+<td>Analysis/Composition.R</td>
 <td>Script to visualise and analyse the strategy-type composition of the last 20 years of simulation for each scenario used in the main part of the manuscript</td>
 </tr>
 <tr class="even">
@@ -202,23 +202,23 @@ pre code {
 <td>Script to visualise the strategy-type composition of the last 20 years of simulation for additional scenarios presented in the appendix</td>
 </tr>
 <tr class="odd">
-<td>Analysis/Richness_evenness.R</td>
+<td>Analysis/Richness_Evenness.R</td>
 <td>Generation of richness and evenness values, visualisation and analysation of the data of the last 20 years of simulation for each scenario used in the main part of the manuscript</td>
 </tr>
 <tr class="even">
-<td>Analysis/Richness_evenness_appendix.R</td>
+<td>Analysis/Richness_Evenness_appendix.R</td>
 <td>Generation of richness and evenness values and visualisation of the data of the last 20 years of simulation for additional scenarios presented in the appendix</td>
 </tr>
 <tr class="odd">
-<td>Analysis/EFA.R</td>
+<td>Analysis/EFA_Clusters.R</td>
 <td>Exploratory factor analysis to determine clusters depending on plant strategies. Additional calculation of functional dispersion (FDis) and visualisation of PFT clusters including individual abundance and distance to centroid for the main scenarios</td>
 </tr>
 <tr class="even">
-<td>Analysis/Waterplots.R</td>
+<td>Analysis/Water.R</td>
 <td>Calculation of T/ET, visualisation of T/ET and soil moisture and statistical evaluation for the main scenarios</td>
 </tr>
 <tr class="odd">
-<td>Analysis/Waterplots_appendix.R</td>
+<td>Analysis/Water_appendix.R</td>
 <td>Calculation of T/ET, visualisation of T/ET and soil moisture for all additional scenarios</td>
 </tr>
 <tr class="even">
@@ -252,6 +252,40 @@ pre code {
 <tr class="odd">
 <td>EH_100years_yearly_EH_SR20/40browse/graze_climrep-x.txt</td>
 <td>EcoHyD simulation output for 100 years based on environmental conditions at Etosha Heights, Namibia. <br> <strong>Year</strong>: year from 0-99 <br> <strong>meanGcover_x</strong>: mean perennial grass cover of strategy types 0-9 [-] <br> <strong>meanScover_x</strong>: mean shrub cover of strategy types 0-11 [-] <br> <strong>meanAcover_x</strong>: mean annual grass cover of base-type [-] <br> <strong>meanGtotalcover</strong>: total perennial grass cover [-] <br> <strong>meanStotalcover</strong>: total shrub cover [-] <br> <strong>meanAtotalcover</strong>: total annual grass cover [-] <br> <strong>Annualevaporation</strong>: total annual evaporation [Vol%] <br> <strong>AnnualtranspirationL1</strong>: total annual plant transpiration of layer 1 [Vol%] <br> <strong>ML1</strong>: soil moisture in layer 1 during rainy season [Vol%]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="folder-matrices_for_efa" class="section level3">
+<h3>Folder /Matrices_for_EFA</h3>
+<p>Matrices used for calculation of functional dispersion as part of the factor analysis in script <em>/Analysis/EFA_Clusters.R</em>.</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cattle_matrix.txt</td>
+<td>Matrix containing abundance data for all plant strategy-types (columns) for each grazing scenario (rows)</td>
+</tr>
+<tr class="even">
+<td>trait_matrix_cattle.txt</td>
+<td>Matrix containing plant strategy-type trait values used for parameterisation in grazing scenarios</td>
+</tr>
+<tr class="odd">
+<td>wildlife_matrix.txt</td>
+<td>Matrix containing abundance data for all plant strategy-types (columns) for each browsing scenario (rows)</td>
+</tr>
+<tr class="even">
+<td>trait_matrix_wildlife.txt</td>
+<td>Matrix containing plant strategy-type trait values used for parameterisation in browsing scenarios</td>
 </tr>
 </tbody>
 </table>
@@ -296,7 +330,7 @@ pre code {
 <td>Soil parameters for loamy sand, calibrated for Etosha Heights.</td>
 </tr>
 <tr class="even">
-<td>vegetationsparameters_<em>ScenarioName</em>.txt</td>
+<td>vegetationparameters_<em>ScenarioName</em>.txt</td>
 <td>General vegetation parameters and specific parameters for the PFTs shrubs, perennial and annual grasses. Sub-types are generated here.</td>
 </tr>
 </tbody>
@@ -324,6 +358,27 @@ pre code {
 </tbody>
 </table>
 </div>
+<div id="folder-r" class="section level2">
+<h2>Folder R</h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Utility.R</td>
+<td>R script to extract often repeating functions from, e.g. reading in data, renaming species, etc.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="folder-sensitivity" class="section level2">
 <h2>Folder /Sensitivity</h2>
 <div id="folder-input" class="section level3">
@@ -342,27 +397,26 @@ pre code {
 </thead>
 <tbody>
 <tr class="odd">
-<td>/Browse/perennials_sensoutput_<strong>ParameterName</strong>_<strong>Date</strong>.txt</td>
+<td>/Browse/perennials_sensoutput_<strong>ParameterName</strong>.txt</td>
 <td>Cover change of perennial grasses in response to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).</td>
 </tr>
 <tr class="even">
-<td>/Browse/shrubss_sensoutput_<strong>ParameterName</strong>_<strong>Date</strong>.txt</td>
+<td>/Browse/shrubss_sensoutput_<strong>ParameterName</strong>.txt</td>
 <td>Cover change of shrubs in response to parameter value changes in browsing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).</td>
 </tr>
 <tr class="odd">
-<td>/Graze/perennials_sensoutput_<strong>ParameterName</strong>_<strong>Date</strong>.txt</td>
+<td>/Graze/perennials_sensoutput_<strong>ParameterName</strong>.txt</td>
 <td>Cover change of perennial grasses in response to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).</td>
 </tr>
 <tr class="even">
-<td>/Graze/shrubss_sensoutput_<strong>ParameterName</strong>_<strong>Date</strong>.txt</td>
+<td>/Graze/shrubss_sensoutput_<strong>ParameterName</strong>.txt</td>
 <td>Cover change of shrubs in response to parameter value changes in grazing scenario for the parameters: biomass production (GR), mortality (MR), palatability (GP), defense (GL), competitive strength for water (UR), water needed for establishment (ES) and resistance to drought (WP).</td>
 </tr>
 </tbody>
 </table>
 </div>
-</div>
-<div id="folder-parms" class="section level2">
-<h2>Folder /Parms</h2>
+<div id="folder-parms" class="section level3">
+<h3>Folder /Parms</h3>
 <table>
 <colgroup>
 <col width="50%" />
@@ -385,6 +439,7 @@ pre code {
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 

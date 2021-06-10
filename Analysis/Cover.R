@@ -29,8 +29,6 @@ meanCover <- makeMeanCover(df = PFTcoverall)
 # ------- Plotting cover over time for all scenarios
 # ===================================================
 
-plotCoverOverTime <- function(PFTcoverall) { # function for generating the combined cover plot
-
   cover <- PFTcoverall[, c("year", "meanGtotalcover", "meanStotalcover", "meanAtotalcover", "scenario")]
 
   cover <- melt(cover, id.vars = c("year", "scenario"))
@@ -199,11 +197,6 @@ plotCoverOverTime <- function(PFTcoverall) { # function for generating the combi
   #        height = 20,
   #        units = "cm", dpi=500)
 
-  return(cover_legend)
-}
-
-plotCoverOverTime(PFTcoverall)
-
 
 
 ##################################################
@@ -244,7 +237,7 @@ if (!require(FSA)) {
 library(rcompanion)
 library(FSA)
 
-# non-parametric Scheirer-Ray-Hare test----------
+# non-parametric Scheirer-Ray-Hare test ---
 scheirerRayHare(TotalCover ~ landuse + intensity, data = cover)
 # H = 153.5, p < 0.001
 
@@ -265,7 +258,7 @@ cldList(P.adj ~ Comparison,
   threshold = 0.05
 ) # letters indicating significance
 
-## Effect size epsilon^2 ---------
+## Effect size epsilon^2 ---
 
 epsilonSquared(x = cover$TotalCover, g = cover$landuse)
 # e^2 = 0.48

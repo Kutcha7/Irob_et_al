@@ -35,6 +35,7 @@ setwd("~/Split_files_browse/")
 parms <- read.table("~/Parms/Sens_output_parameter_browsing_na.txt", header = T, sep="\t")
 
 PFT <-as.list(gsub("_sensoutput.*", "", files))
+# make sure split files folders (graze + browse) are empty!!! -----------
 setwd("~/Split_files_browse/")
 
 

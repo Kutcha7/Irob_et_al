@@ -6,7 +6,7 @@ output:
 # Content description and contact information
 
 This repository contains all R-scripts and respective model output data needed to reproduce the methods, results and figures of the manuscript 
-*Browsing herbivores improve the state and functioning of savannas – a model assessment of alternative land use strategies* by Katja Irob, Niels Blaum, Selina Baldauf, Leon Kerger, Ben Strohbach, Angelina Kanduvarisa, Dirk Lohmann and Britta Tietjen. 
+*Browsing herbivores improve the state and functioning of savannas: a model assessment of alternative land use strategies* by Katja Irob, Niels Blaum, Selina Baldauf, Leon Kerger, Ben Strohbach, Angelina Kanduvarisa, Dirk Lohmann and Britta Tietjen. 
 For any questions regarding content in this repository please contact <a href="mailto:irob.k@fu-berlin.de">Katja Irob</a>.
 
 ## R-Scripts 
@@ -44,14 +44,18 @@ Matrices used for calculation of functional dispersion as part of the factor ana
 
 | File        | Description   | 
 | ------------- |-------------| 
-| cattle_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each grazing scenario (rows) |
-| trait_matrix_cattle.txt | Matrix containing plant strategy-type trait values used for parameterisation in grazing scenarios |
-| wildlife_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each browsing scenario (rows) |
-| trait_matrix_wildlife.txt | Matrix containing plant strategy-type trait values used for parameterisation in browsing scenarios |
+| cattle_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each grazing scenario (rows). |
+| trait_matrix_cattle.txt | Matrix containing plant strategy-type trait values used for parameterisation in grazing scenarios. |
+| wildlife_matrix.txt | Matrix containing abundance data for all plant strategy-types (columns) for each browsing scenario (rows). |
+| trait_matrix_wildlife.txt | Matrix containing plant strategy-type trait values used for parameterisation in browsing scenarios. |
 
 # Folder /Model
 
 Model source files  can be found in */Source*. To reproduce examples, download repository and keep folder structure. Output files are stored in  */Results*.
+
+| File        | Description   | 
+| ------------- |-------------|
+| compile.sh    |  Example bash script to compile and run the model. |
 
 ## Folder /Parameters
 

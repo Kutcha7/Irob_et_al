@@ -169,8 +169,7 @@ clust <- dbFD(cattle_trait, Cattle_Mat_no_extinct_sp,
 
 clust2 <- dbFD(cattle_trait, Cattle_Mat_no_extinct_sp,
   corr = "cailliez",
-  calc.FGR = TRUE, clust.type = "kmeans", km.sup.gr = 2
-)
+  calc.FGR = TRUE, clust.type = "kmeans", km.sup.gr = 2)
 
 
 #############################################
@@ -391,9 +390,9 @@ align = "hv"
 ## adding the legend to the plot ---
 
 CFA_legend <- plot_grid(coverplots, legend, ncol = 2, rel_widths = c(5, 1)) # change nrow back to 2
-
+CFA_legend
 # saving the plot
-# ggsave(CFA_legend, file="Plot_Cluster_by_cover.png", width = 34,
+# ggsave(CFA_legend, file="Plot_Cluster_by_cover.tiff", width = 34,
 #        height = 16,
 #        units = "cm", dpi=600)
 

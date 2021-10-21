@@ -49,13 +49,13 @@ cover <- cover %>% # rename columns
 
 # rename scenarios --
 cover$scenario <- as.character(cover$scenario)
-cover$scenario[cover$scenario == "SR40graze"] <- "Cattle low"
-cover$scenario[cover$scenario == "SR20graze"] <- "Cattle high"
+cover$scenario[cover$scenario == "SR40graze"] <- "Grazing low"
+cover$scenario[cover$scenario == "SR20graze"] <- "Grazing high"
 #
-cover$scenario[cover$scenario == "SR20browse"] <- "Wildlife high"
-cover$scenario[cover$scenario == "SR40browse"] <- "Wildlife low"
+cover$scenario[cover$scenario == "SR20browse"] <- "Browsing high"
+cover$scenario[cover$scenario == "SR40browse"] <- "Browsing low"
 
-cover$scenario <- factor(cover$scenario, levels = c("Cattle low", "Wildlife low", "Cattle high", "Wildlife high"))
+cover$scenario <- factor(cover$scenario, levels = c("Grazing low", "Grazing high", "Browsing low", "Browsing high"))
 
 cover$type <- ifelse(grepl("(meanGCover)", cover$PFT), "Perennial", ifelse(grepl("(meanSCover)", cover$PFT), "Shrub", "Annual")) # create properly named meta PFT column
 
@@ -133,6 +133,7 @@ richness <- ggplot(sumperclimrep, aes(x = scenario, y = speciesRich)) +
   ylab(bquote("Richness")) +
   xlab("\nLand use type") +
   scale_color_manual(values = c("gold1", "seagreen", "coral")) +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 14),
     axis.text.y = element_text(size = 14),
@@ -191,6 +192,7 @@ Evenness <- ggplot(evennessdf, aes(x = scenario, y = Total)) +
   geom_pointrange(aes(ymin = Total - sd, ymax = Total + sd), size = 1, data = eventotal) +
   ylab(bquote("Evenness \nPilou's J")) +
   xlab("\nLand use type") +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 14),
     axis.text.y = element_text(size = 14),
@@ -207,8 +209,6 @@ Evenness
 
 ## combine plots ------
 
-
-
 # remove legends
 richness <- richness + theme(legend.position = "none")
 Evenness <- Evenness + theme(legend.position = "none")
@@ -224,9 +224,9 @@ biodivricheven_legend <- plot_grid(richevenplots, legend, nrow = 2, rel_heights 
 biodivricheven_legend
 
 
-# ggsave(biodivricheven_legend, file="richness_evenness_264.png", width = 34,
-#        height = 16,
-#        units = "cm", dpi=500)
+ggsave(biodivricheven_legend, file="richness_evenness_revised.tiff", width = 34,
+       height = 16,
+       units = "cm", dpi=600)
 
 
 

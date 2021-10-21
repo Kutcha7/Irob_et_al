@@ -51,13 +51,13 @@ cover$cover <- cover$cover * 100 # percentage
 
 # rename scenarios
 cover$scenario <- as.character(cover$scenario)
-cover$scenario[cover$scenario == "SR40graze"] <- paste("Cattle low")
-cover$scenario[cover$scenario == "SR20graze"] <- paste("Cattle high")
+cover$scenario[cover$scenario == "SR40graze"] <- "Grazing low"
+cover$scenario[cover$scenario == "SR20graze"] <- "Grazing high"
 #
-cover$scenario[cover$scenario == "SR40browse"] <- paste("Wildlife low")
-cover$scenario[cover$scenario == "SR20browse"] <- paste("Wildlife high")
+cover$scenario[cover$scenario == "SR20browse"] <- "Browsing high"
+cover$scenario[cover$scenario == "SR40browse"] <- "Browsing low"
 
-cover$scenario <- factor(cover$scenario, levels = c("Cattle high", "Cattle low", "Wildlife high", "Wildlife low"))
+cover$scenario <- factor(cover$scenario, levels = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"))
 
 
 # rename PFTs
@@ -82,13 +82,13 @@ shrubs_agg <- shrubs %>%
 
 shrubs_agg$treatment <- shrubs_agg$scenario
 shrubs_agg$treatment <- as.character(shrubs_agg$treatment)
-shrubs_agg$treatment[shrubs_agg$treatment == "Cattle low"] <- "Cattle"
-shrubs_agg$treatment[shrubs_agg$treatment == "Cattle high"] <- "Cattle"
+shrubs_agg$treatment[shrubs_agg$treatment == "Grazing low"] <- "Grazing"
+shrubs_agg$treatment[shrubs_agg$treatment == "Grazing high"] <- "Grazing"
 #
-shrubs_agg$treatment[shrubs_agg$treatment == "Wildlife low"] <- "Wildlife"
-shrubs_agg$treatment[shrubs_agg$treatment == "Wildlife high"] <- "Wildlife"
+shrubs_agg$treatment[shrubs_agg$treatment == "Browsing low"] <- "Browsing"
+shrubs_agg$treatment[shrubs_agg$treatment == "Browsing high"] <- "Browsing"
 
-shrubs_agg$scenario <- factor(shrubs_agg$scenario, levels = c("Cattle high", "Cattle low", "Wildlife high", "Wildlife low"))
+shrubs_agg$scenario <- factor(shrubs_agg$scenario, levels = c("Grazing high", "Grazing low", "Browsing high", "Browsing low"))
 
 
 shrubs_agg$treatment <- as.factor(shrubs_agg$treatment)
@@ -96,11 +96,11 @@ shrubs_agg$treatment <- as.factor(shrubs_agg$treatment)
 
 shrubs_agg$effect <- shrubs_agg$scenario
 shrubs_agg$effect <- as.character(shrubs_agg$effect)
-shrubs_agg$effect[shrubs_agg$effect == "Cattle low"] <- "low"
-shrubs_agg$effect[shrubs_agg$effect == "Cattle high"] <- "high"
+shrubs_agg$effect[shrubs_agg$effect == "Grazing low"] <- "low"
+shrubs_agg$effect[shrubs_agg$effect == "Grazing high"] <- "high"
 #
-shrubs_agg$effect[shrubs_agg$effect == "Wildlife high"] <- "low"
-shrubs_agg$effect[shrubs_agg$effect == "Wildlife low"] <- "high"
+shrubs_agg$effect[shrubs_agg$effect == "Browsing high"] <- "low"
+shrubs_agg$effect[shrubs_agg$effect == "Browsing low"] <- "high"
 
 shrubs_agg$effect <- as.factor(shrubs_agg$effect)
 
@@ -112,7 +112,7 @@ shrubs_agg$PFT2 <- paste(shrubs_agg$PFT, shrubs_agg$effect)
 namesShrubs <- c("Base", "Base", "Cb", "Cb", "Rd", "Rd", "Rc", "Rc", "Bd", "Bd", "Bc", "Bc", "Bp", "Bp", "Dc", "Dc", "Db", "Db", "Dr", "Dr", "Mb", "Mb")
 namesShrubs <- c("Base", "", "Cb", "", "Rd", "", "Rc", "", "Bd", "", "Bc", "", "Bp", "", "Dc", "", "Db", "", "Dr", "", "Mb", "")
 
-shrubs_agg$treatment <- factor(shrubs_agg$treatment, levels = c("Cattle", "Wildlife"))
+shrubs_agg$treatment <- factor(shrubs_agg$treatment, levels = c("Grazing", "Browsing"))
 
 
 shrubs_by_strat_bytreatment_swap <- ggplot(shrubs_agg, aes(y = mean, x = PFT, fill = scenario)) +
@@ -123,8 +123,9 @@ shrubs_by_strat_bytreatment_swap <- ggplot(shrubs_agg, aes(y = mean, x = PFT, fi
   ggtitle("Shrubs") +
   coord_flip() +
   scale_y_continuous(limits = c(0, 10), breaks = c(0, 5, 10)) +
-  scale_fill_manual(breaks = c("Cattle low", "Cattle high", "Wildlife low", "Wildlife high"), values = c("coral", "coral4", "cyan", "seagreen")) +
+  scale_fill_manual(breaks = c("Grazing low", "Grazing high", "Browsing low", "Browsing high"), values = c("coral", "coral4", "cyan", "seagreen")) +
   facet_wrap(. ~ treatment, ncol = 4) +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 12),
     axis.text.y = element_text(size = 13, face = "bold"),
@@ -150,25 +151,25 @@ perennials_agg <- perennials %>%
   group_by(PFT, scenario, type) %>%
   summarise_at(vars(cover), funs(mean, max, min, sd))
 
-perennials_agg$scenario <- factor(perennials_agg$scenario, levels = c("Cattle high", "Cattle low", "Wildlife high", "Wildlife low"))
+perennials_agg$scenario <- factor(perennials_agg$scenario, levels = c("Grazing high", "Grazing low", "Browsing high", "Browsing low"))
 perennials_agg$treatment <- perennials_agg$scenario
 perennials_agg$treatment <- as.character(perennials_agg$treatment)
-perennials_agg$treatment[perennials_agg$treatment == "Cattle low"] <- "Cattle"
-perennials_agg$treatment[perennials_agg$treatment == "Cattle high"] <- "Cattle"
+perennials_agg$treatment[perennials_agg$treatment == "Grazing low"] <- "Grazing"
+perennials_agg$treatment[perennials_agg$treatment == "Grazing high"] <- "Grazing"
 #
-perennials_agg$treatment[perennials_agg$treatment == "Wildlife low"] <- "Wildlife"
-perennials_agg$treatment[perennials_agg$treatment == "Wildlife high"] <- "Wildlife"
+perennials_agg$treatment[perennials_agg$treatment == "Browsing low"] <- "Browsing"
+perennials_agg$treatment[perennials_agg$treatment == "Browsing high"] <- "Browsing"
 
 perennials_agg$treatment <- as.factor(perennials_agg$treatment)
 
 
 perennials_agg$effect <- perennials_agg$scenario
 perennials_agg$effect <- as.character(perennials_agg$effect)
-perennials_agg$effect[perennials_agg$effect == "Cattle low"] <- "low"
-perennials_agg$effect[perennials_agg$effect == "Cattle high"] <- "high"
+perennials_agg$effect[perennials_agg$effect == "Grazing low"] <- "low"
+perennials_agg$effect[perennials_agg$effect == "Grazing high"] <- "high"
 #
-perennials_agg$effect[perennials_agg$effect == "Wildlife high"] <- "low"
-perennials_agg$effect[perennials_agg$effect == "Wildlife low"] <- "high"
+perennials_agg$effect[perennials_agg$effect == "Browsing high"] <- "low"
+perennials_agg$effect[perennials_agg$effect == "Browsing low"] <- "high"
 
 perennials_agg$effect <- as.factor(perennials_agg$effect)
 
@@ -185,8 +186,9 @@ perennials_by_strat_bytreatment_swap <- ggplot(perennials_agg, aes(y = mean, x =
   ggtitle("Perennials") +
   coord_flip() +
   scale_y_continuous(limits = c(0, 32), breaks = c(0, 5, 10, 15, 20, 25, 30)) +
-  scale_fill_manual(breaks = c("Cattle low", "Cattle high", "Wildlife low", "Wildlife high"), values = c("coral", "coral4", "cyan", "seagreen")) +
+  scale_fill_manual(breaks = c("Grazing low", "Grazing high", "Browsing low", "Browsing high"), values = c("coral", "coral4", "cyan", "seagreen")) +
   facet_wrap(. ~ treatment, ncol = 4) +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 12),
     axis.text.y = element_text(size = 13, face = "bold"),
@@ -206,7 +208,7 @@ perennials_by_strat_bytreatment_swap
 
 ## make universal legend with scenarios in right order -----
 
-perennials_agg$scenario <- factor(perennials_agg$scenario, levels = c("Cattle low", "Wildlife low", "Cattle high", "Wildlife high"))
+perennials_agg$scenario <- factor(perennials_agg$scenario, levels = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"))
 
 perennials_by_strat_legend <- ggplot(perennials_agg, aes(y = mean, x = PFT, fill = scenario)) +
   geom_bar(stat = "identity", color = "lightgray", width = 0.9, position = position_dodge(width = 0.7)) +
@@ -215,9 +217,10 @@ perennials_by_strat_legend <- ggplot(perennials_agg, aes(y = mean, x = PFT, fill
   xlab("\nStrategy") +
   ggtitle("Perennials") +
   coord_flip() +
-  scale_y_continuous(limits = c(0, 13), breaks = c(0, 5, 10)) +
-  scale_fill_manual(breaks = c("Cattle low", "Wildlife low", "Cattle high", "Wildlife high"), values = c("coral", "cyan", "coral4", "seagreen")) +
+  scale_y_continuous(limits = c(0, 30), breaks = c(0, 5, 10)) +
+  scale_fill_manual(breaks = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"), values = c("coral", "cyan", "coral4", "seagreen")) +
   facet_wrap(. ~ treatment, ncol = 4) +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 12),
     axis.text.y = element_text(size = 13, face = "bold"),
@@ -234,7 +237,7 @@ perennials_by_strat_legend <- ggplot(perennials_agg, aes(y = mean, x = PFT, fill
   )
 perennials_by_strat_legend
 
-legend <- get_legend(perennials_by_strat_bytreatment_swap)
+legend <- get_legend(perennials_by_strat_legend)
 
 
 # combine all plots together -----------------
@@ -255,9 +258,9 @@ comp_legend <- plot_grid(compplots, legend, nrow = 2, rel_heights = c(1, 0.1))
 comp_legend
 
 
-# ggsave(comp_legend, file="composition_comb_76.png", width = 32,
-#        height = 20,
-#        units = "cm", dpi=500)
+ggsave(comp_legend, file="composition_comb_revised.tiff", width = 32,
+       height = 20,
+       units = "cm", dpi=600)
 
 
 ##################################################

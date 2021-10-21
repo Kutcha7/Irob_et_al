@@ -44,14 +44,14 @@ meanCover <- makeMeanCover(df = PFTcoverall)
   # renaming scenarios
 
   cover$scenario <- as.character(cover$scenario)
-  cover$scenario[cover$scenario == "SR40graze"] <- "Cattle low"
-  cover$scenario[cover$scenario == "SR20graze"] <- "Cattle high"
+  cover$scenario[cover$scenario == "SR40graze"] <- "Grazing low"
+  cover$scenario[cover$scenario == "SR20graze"] <- "Grazing high"
   #
-  cover$scenario[cover$scenario == "SR20browse"] <- "Wildlife high"
-  cover$scenario[cover$scenario == "SR40browse"] <- "Wildlife low"
-
-  cover$scenario <- factor(cover$scenario, levels = c("Cattle low", "Wildlife low", "Cattle high", "Wildlife high")) # bring scenario in desired order
-
+  cover$scenario[cover$scenario == "SR20browse"] <- "Browsing high"
+  cover$scenario[cover$scenario == "SR40browse"] <- "Browsing low"
+  
+  cover$scenario <- factor(cover$scenario, levels = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"))
+  
   # select colours for plotting
   cols <- c("gold1", "seagreen", "coral")
 
@@ -102,13 +102,14 @@ meanCover <- makeMeanCover(df = PFTcoverall)
 
   # rename scenarios
   cover$scenario <- as.character(cover$scenario)
-  cover$scenario[cover$scenario == "SR40graze"] <- "Cattle_low"
-  cover$scenario[cover$scenario == "SR20graze"] <- "Cattle_high"
+  cover$scenario[cover$scenario == "SR40graze"] <- "Grazing low"
+  cover$scenario[cover$scenario == "SR20graze"] <- "Grazing high"
   #
-  cover$scenario[cover$scenario == "SR20browse"] <- "Wildlife_high"
-  cover$scenario[cover$scenario == "SR40browse"] <- "Wildlife_low"
-
-  cover$scenario <- factor(cover$scenario, levels = c("Cattle_low", "Wildlife_low", "Cattle_high", "Wildlife_high"))
+  cover$scenario[cover$scenario == "SR20browse"] <- "Browsing high"
+  cover$scenario[cover$scenario == "SR40browse"] <- "Browsing low"
+  
+  cover$scenario <- factor(cover$scenario, levels = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"))
+  
   scenario_list <- unique(cover$scenario)
 
   barplot_list <- list()
@@ -123,7 +124,7 @@ meanCover <- makeMeanCover(df = PFTcoverall)
       subset(cover, scenario == scenario_list[i]),
       aes(y = cover, x = scenario, fill = type)
     ) +
-      geom_col(color = "whitesmoke", lwd = 0.28) +
+      geom_col() +
       ylim(0, 100) +
       ylab(bquote("Mean cover")) +
       scale_fill_manual(values = cols) +
@@ -139,19 +140,18 @@ meanCover <- makeMeanCover(df = PFTcoverall)
         panel.background = element_blank()
       )
 
-    barplot_list[[i]] <- survival20
+    barplotname <- paste0(gsub(" ", "_", scenario_list[i]), "_bar")
+    
+    barplot_list[[barplotname]] <- survival20
+    
   }
 
-  scen_list <- c("Cattle_low", "Wildlife_low", "Cattle_high", "Wildlife_high")
 
-  names(barplot_list) <- print(paste0(scenario_list, "_bar"))
-
-  barplot_list$Wildlife_high_bar
 
   # Extract legend from this plot:
   cattle_low_bar <- ggplot(
-    subset(cover, scenario %in% "Cattle_low"),
-    aes(y = cover, x = scenario == "Cattle_low", fill = type)
+    subset(cover, scenario %in% "Grazing low"),
+    aes(y = cover, x = scenario == "Grazing low", fill = type)
   ) +
     geom_col(color = "whitesmoke", lwd = 0.3) +
     ylim(0, 100) +
@@ -183,8 +183,8 @@ meanCover <- makeMeanCover(df = PFTcoverall)
 
   # arrange all plots and legend in one plot ---------------------
 
-  coverplots <- plot_grid(plot_list$Cattle_low_line, barplot_list$Cattle_low_bar, plot_list$Wildlife_low_line, barplot_list$Wildlife_low_bar,
-    plot_list$Cattle_high_line, barplot_list$Cattle_high_bar, plot_list$Wildlife_high_line, barplot_list$Wildlife_high_bar,
+  coverplots <- plot_grid(plot_list$Grazing_low_line, barplot_list$Grazing_low_bar, plot_list$Browsing_low_line, barplot_list$Browsing_low_bar,
+    plot_list$Grazing_high_line, barplot_list$Grazing_high_bar, plot_list$Browsing_high_line, barplot_list$Browsing_high_bar,
     ncol = 4, nrow = 2,
     rel_widths = c(4, 1.5, 4, 1.5),
     labels = c("a", "", "b", "", "c", "", "d", ""),
@@ -193,9 +193,9 @@ meanCover <- makeMeanCover(df = PFTcoverall)
 
   cover_legend <- plot_grid(coverplots, legend, nrow = 2, rel_heights = c(1, 0.1))
 
-  # ggsave(cover_legend, file="cover_combined_all_scenarios.png", width = 32,
-  #        height = 20,
-  #        units = "cm", dpi=500)
+  ggsave(cover_legend, file="cover_combined_all_scenarios_revised.tiff", width = 32,
+         height = 20,
+         units = "cm", dpi=600)
 
 
 

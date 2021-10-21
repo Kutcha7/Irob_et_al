@@ -125,7 +125,7 @@ oneway.test(ML1 ~ scenario,
 
 cover <- PFTcoverall[, c("wateravailability", "ML1", "ML2", "year", "wateravailability2", "scenario", "totalCover", "climrep", "meanGtotalcover", "meanAtotalcover", "meanStotalcover")]
 cover <- cover %>% filter(year > 79)
-cover <- melt(cover, id.vars = c("scenario", "wateravailability", "wateravailability2", "ML1", "ML2", "totalCover", "climrep"))
+cover <- reshape2::melt(cover, id.vars = c("scenario", "wateravailability", "wateravailability2", "ML1", "ML2", "totalCover", "climrep"))
 
 cover$totalCover <- cover$totalCover * 100
 cover$wateravailability <- cover$wateravailability * 100
@@ -142,14 +142,13 @@ cover$type <- ifelse(grepl("(meanGtotalcover)", cover$PFT), "Perennial", ifelse(
 
 # rename scenarios
 cover$scenario <- as.character(cover$scenario)
-cover$scenario[cover$scenario == "SR40graze"] <- "Cattle low"
-cover$scenario[cover$scenario == "SR20graze"] <- "Cattle high"
+cover$scenario[cover$scenario == "SR40graze"] <- "Grazing low"
+cover$scenario[cover$scenario == "SR20graze"] <- "Grazing high"
 #
-cover$scenario[cover$scenario == "SR20browse"] <- "Wildlife high"
-cover$scenario[cover$scenario == "SR40browse"] <- "Wildlife low"
-
-# order by scenario
-cover$scenario <- factor(cover$scenario, levels = c("Cattle low", "Wildlife low", "Cattle high", "Wildlife high"))
+cover$scenario[cover$scenario == "SR20browse"] <- "Browsing high"
+cover$scenario[cover$scenario == "SR40browse"] <- "Browsing low"
+# order by  scenario
+cover$scenario <- factor(cover$scenario, levels = c("Grazing low", "Browsing low", "Grazing high", "Browsing high"))
 
 
 # make plot ---
@@ -168,6 +167,7 @@ Scatterplot <- ggplot(WaterVals_mean, aes(x = totalCover_mean, y = wateravailabi
   ylab(bquote("T/(ET) L1 \n [%]")) +
   xlab("\nTotal cover [%]") +
   scale_color_manual(values = c(cols)) +
+  theme_set(theme_minimal()) +
   theme(
     axis.text.x = element_text(size = 14),
     axis.text.y = element_text(size = 14),
@@ -184,9 +184,9 @@ Scatterplot <- ggplot(WaterVals_mean, aes(x = totalCover_mean, y = wateravailabi
 Scatterplot
 
 # save plot
-# ggsave(Scatterplot, file="T_ET_cover.png", width = 32,
-#        height = 16,
-#        units = "cm", dpi=450)
+ggsave(Scatterplot, file="T_ET_cover_revised.tiff", width = 32,
+       height = 16,
+       units = "cm", dpi=600)
 
 # soil moisutre --
 Scatterplot_ML1 <- ggplot(WaterVals_mean, aes(x = totalCover_mean, y = ML1_mean, color = scenario, shape = scenario)) +
